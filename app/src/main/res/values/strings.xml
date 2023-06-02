@@ -1,3 +1,12 @@
 <resources>
-    <string name="app_name">VoidMobileBanking</string>
+    <string name="app_name">Mobile Banking</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcome_back">Welcome back</string>
+    <string name="customer">Customer</string>
+    <string name="mr_customer">Mr. Customer</string>
+    <string name="view_balance">VIEW BALANCE</string>
+    <string name="savings_ac">Savings A/c: XXXXXXX6789</string>
+    <string name="currencies">Currencies</string>
+    <string name="view_all">View All</string>
 </resources>

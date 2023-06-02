@@ -7,4 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="status_bar">#00ff0000</color>
+    <color name="colorPrimary">#4ba4e0</color>
+    <color name="colorPrimaryDark">#3690ce</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="balance_card_bg">#D0EBF6</color>
+    <color name="violet_margin">#A575E6</color>
+    <color name="bg_dashboard">#F9FAFB</color>
+    <color name="title">#1C4268</color>
+    <color name="light_grey">#DCDCDD</color>
 </resources>
