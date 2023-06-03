@@ -9,4 +9,11 @@
     <string name="savings_ac">Savings A/c: XXXXXXX6789</string>
     <string name="currencies">Currencies</string>
     <string name="view_all">View All</string>
+    <string name="log_in">Log in</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="invalid_otp">Invalid OTP</string>
+    <string name="enter_otp">Please enter OTP</string>
+    <string name="enter_valid_phone_number">Enter valid phone number</string>
+    <string name="enter_phone_number">Please enter phone number</string>
+    <string name="funds_transfer">Funds Transfer</string>
 </resources>

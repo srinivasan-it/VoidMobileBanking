@@ -11,37 +11,82 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="15dp"
-            android:text="@string/currencies"
-            android:textColor="@color/title"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <View
-            android:id="@+id/line_view"
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmer"
             android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_margin="5dp"
-            android:background="@color/light_grey"
-            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+            android:layout_height="match_parent"
+            android:visibility="visible">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_currency_list"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/bg_ui"
+                android:orientation="vertical">
+
+                <include layout="@layout/shimmer_list_item_currency" />
+                <include layout="@layout/shimmer_list_item_currency" />
+                <include layout="@layout/shimmer_list_item_currency" />
+                <include layout="@layout/shimmer_list_item_currency" />
+                <include layout="@layout/shimmer_list_item_currency" />
+                <include layout="@layout/shimmer_list_item_currency" />
+                <include layout="@layout/shimmer_list_item_currency" />
+                <include layout="@layout/shimmer_list_item_currency" />
+                <include layout="@layout/shimmer_list_item_currency" />
+                <include layout="@layout/shimmer_list_item_currency" />
+                <include layout="@layout/shimmer_list_item_currency" />
+                <include layout="@layout/shimmer_list_item_currency" />
+                <include layout="@layout/shimmer_list_item_currency" />
+                <include layout="@layout/shimmer_list_item_currency" />
+                <include layout="@layout/shimmer_list_item_currency" />
+                <include layout="@layout/shimmer_list_item_currency" />
+                <include layout="@layout/shimmer_list_item_currency" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/currencies"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="10dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/line_view"
-            tools:listitem="@layout/list_item_currency" />
+            android:layout_height="match_parent"
+            android:visibility="gone"
+            android:background="@color/bg_ui">
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:text="@string/currencies"
+                android:textColor="@color/title"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/line_view"
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:layout_margin="5dp"
+                android:background="@color/light_grey"
+                app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_currency_list"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_margin="10dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/line_view"
+                tools:listitem="@layout/list_item_currency" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

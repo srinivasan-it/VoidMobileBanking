@@ -13,12 +13,57 @@
         tools:context=".view.AuthFragment">
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_phone_no"
+            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Phone No"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            android:padding="15dp"
+            android:text="@string/log_in"
+            android:textColor="@color/title"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/line_view"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_margin="5dp"
+            android:background="@color/light_grey"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_mobile_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="50dp"
+            android:hint="@string/phone_number"
+            android:textColorHint="@color/hint"
+            app:errorEnabled="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/line_view">
+
+            <!-- android:theme="@style/MyTextInputLayout_overlay"
+            app:setLayoutError="{viewModel.validationErrorMsg}"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.Dense"-->
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_mobile_number"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:imeOptions="actionNext"
+                android:inputType="number"
+                android:maxLength="11"
+                android:paddingHorizontal="5dp"
+                android:textColor="@color/hint" />
+
+            <!--      style="@style/TextAppearance.EditText.Description"-->
+
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <com.chaos.view.PinView
@@ -37,15 +82,29 @@
             android:textStyle="bold"
             app:cursorWidth="2dp"
             app:itemCount="4"
-            app:itemHeight="60dp"
+            app:itemHeight="50dp"
             app:itemRadius="4dp"
             app:itemSpacing="10dp"
             app:itemWidth="48dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/til_mobile_number"
             app:lineColor="@color/colorPrimary"
             app:lineWidth="2dp"
-            app:viewType="rectangle"
-            app:layout_constraintTop_toBottomOf="@id/tv_phone_no"
-            app:layout_constraintStart_toStartOf="parent"/>
+            app:viewType="rectangle" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
+            android:text="@string/log_in"
+            android:textColor="@color/white"
+            android:background="@color/colorPrimary"
+            android:fontFamily="@font/roboto_bold"
+            app:layout_constraintTop_toBottomOf="@id/pv_otp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

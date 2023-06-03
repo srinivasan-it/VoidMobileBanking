@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.voidmobilebanking.model.Currencies
 
 /**
- * Created by srinivasan on 02/06/23.
+ * Binds the item data with UI
  */
 class CurrenciesBinder {
 

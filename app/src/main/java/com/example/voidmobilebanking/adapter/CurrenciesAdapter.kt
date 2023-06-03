@@ -9,7 +9,7 @@ import com.example.voidmobilebanking.databinding.ListItemCurrencyBinding
 import com.example.voidmobilebanking.model.Currencies
 
 /**
- * Created by srinivasan on 02/06/23.
+ * [RecyclerView.Adapter] to list the currencies data in the UI
  */
 class CurrenciesAdapter(
     private val viewLifeCycleOwner: LifecycleOwner
@@ -17,6 +17,9 @@ class CurrenciesAdapter(
 
     private var currencies = emptyList<Currencies>()
 
+    /**
+     * [RecyclerView.ViewHolder] to hold the currency data in the UI
+     */
     inner class CurrenciesViewHolder(
         private val itemBinding: ListItemCurrencyBinding
     ) : RecyclerView.ViewHolder(itemBinding.root) {

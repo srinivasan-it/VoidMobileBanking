@@ -1,10 +1,6 @@
 package com.example.voidmobilebanking.viewmodel
 
-import android.util.Log
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.createSavedStateHandle
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import androidx.lifecycle.viewmodel.CreationExtras
 import com.example.voidmobilebanking.BuildConfig
 import com.example.voidmobilebanking.model.Currencies
@@ -19,45 +15,52 @@ import org.ksoap2.transport.HttpTransportSE
 import java.net.SocketTimeoutException
 
 /**
- * Created by srinivasan on 02/06/23.
+ * Make the network call to get currencies list from db using SOAP
  */
 class DashboardViewModel : ViewModel() {
 
-    // ViewModelProvider(this, MainViewModel.Factory)[MainViewModel::class.java]
-
-    val soapObject = SoapObject(BuildConfig.NAME_SPACE, BuildConfig.METHOD_NAME)
+    private val soapObject = SoapObject(BuildConfig.NAME_SPACE, BuildConfig.METHOD_NAME)
     val envelope = SoapSerializationEnvelope(SoapEnvelope.VER11)
 
-    init {
+    private var _error = MutableLiveData<String>()
+    val error: LiveData<String> = _error
 
+    private var _currenciesList = MutableLiveData<ArrayList<Currencies>>()
+    val currenciesList: LiveData<ArrayList<Currencies>> = _currenciesList
+
+    fun getCurrencies() {
         envelope.dotNet = true
         envelope.setOutputSoapObject(soapObject)
-
         val tse = HttpTransportSE(BuildConfig.URL)
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
-                withContext(Dispatchers.IO) {
-                    try {
-                        tse.call(BuildConfig.SOAP_ACTION, envelope)
-
-
-                        val resultString = envelope.response
-                        var currencies = parsePlainTextToModel(envelope.response.toString())
-                        Log.e("", "parsePlainTextToModel is " + currencies)
-                    } catch (e: HttpResponseException) {
-                        Log.e("", "error is " + e.message.toString())
+                try {
+                    tse.call(BuildConfig.SOAP_ACTION, envelope)
+                    withContext(Dispatchers.Main) {
+                        parsePlainTextToModel(envelope.response.toString())
                     }
-
+                } catch (e: HttpResponseException) {
+                    withContext(Dispatchers.Main) {
+                        _error.value = e.message.toString()
+                    }
                 }
+
             } catch (e: SocketTimeoutException) {
-                e.printStackTrace()
+                withContext(Dispatchers.Main) {
+                    _error.value = e.message.toString()
+                }
             }
         }
     }
 
-    fun parsePlainTextToModel(plainText: String): Currencies? {
-        // Split the plain text into individual values
+    /**
+     * Didn't get the response as XML.
+     * @param plainText is the response getting from API.
+     * So using [split] to convert the response to model.
+     */
+    private fun parsePlainTextToModel(plainText: String) {
+
         val values = plainText.split("tCurrency=anyType")
 
         val splittedByIsoCode = arrayListOf<String>()
@@ -75,17 +78,16 @@ class DashboardViewModel : ViewModel() {
             semicolon.addAll(it.split("; };"))
         }
 
-        val zzz = arrayListOf<String>()
+        val redundant = arrayListOf<String>()
         semicolon.forEach {
-            if (it != "anyType{" && it != "{" && it != "}" && it != " }" && it != "" && it != " ") {
-                zzz.add(it)
-            }
+            if (notContainsFillers(it))
+                redundant.add(it)
         }
 
         val code = arrayListOf<String>()
         val name = arrayListOf<String>()
 
-        zzz.forEachIndexed { index, s ->
+        redundant.forEachIndexed { index, s ->
             if (index == 0) {
                 code.add(s)
             } else if (index == 1) {
@@ -97,28 +99,18 @@ class DashboardViewModel : ViewModel() {
             }
         }
 
-        Log.e("", "codes are: " + code)
-        Log.e("", "names are: " + name)
-
         val currencies = arrayListOf<Currencies>()
-
 
         code.forEachIndexed { index, s ->
             currencies.add(Currencies(currencyCode = code[index], currencyName = name[index]))
         }
-        Log.e("", "namessss are: " + currencies)
 
+        _currenciesList.value = currencies
 
-        try {
-
-            val code = zzz[0]
-            val currencyName = zzz[1]
-
-            return Currencies(code, currencyName)
-        } catch (e: Exception) {
-            return null
-        }
     }
+
+    private fun notContainsFillers(it: String) =
+        it != "anyType{" && it != "{" && it != "}" && it != " }" && it != "" && it != " "
 
 
     companion object {
@@ -129,12 +121,8 @@ class DashboardViewModel : ViewModel() {
                 modelClass: Class<T>,
                 extras: CreationExtras
             ): T {
-                // Get the Application object from extras
                 val application =
                     checkNotNull(extras[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY])
-                // Create a SavedStateHandle for this ViewModel from extras
-                val savedStateHandle = extras.createSavedStateHandle()
-
                 return DashboardViewModel() as T
             }
         }
