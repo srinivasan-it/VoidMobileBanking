@@ -16,4 +16,11 @@
     <string name="enter_valid_phone_number">Enter valid phone number</string>
     <string name="enter_phone_number">Please enter phone number</string>
     <string name="funds_transfer">Funds Transfer</string>
+    <string name="transfer">Transfer</string>
+    <string name="amount">Amount</string>
+    <string name="transaction">Transaction</string>
+    <string name="transfer_success">Transfer Success</string>
+    <string name="amount_transferred_successfully">Amount transferred and credited \n to the account successfully</string>
+    <string name="please_wait_page_automatically_redirected">Please wait.\nPage will be automatically\nredirected to home page..</string>
+    <string name="enter_valid_amount">Please enter valid amount</string>
 </resources>

@@ -3,7 +3,6 @@ package com.example.voidmobilebanking.view
 import android.content.Context
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,12 +10,9 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.voidmobilebanking.R
 import com.example.voidmobilebanking.databinding.FragmentAuthBinding
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 /**
  * [AuthFragment] - used to log in the app
@@ -46,7 +42,7 @@ class AuthFragment : Fragment() {
             binding.tilMobileNumber.error = null
         }
 
-        binding.pvOtp.setOnClickListener {
+        binding.pvOtp.setOnFocusChangeListener { _, _ ->
             phoneNumberValidation()
         }
 
@@ -57,14 +53,14 @@ class AuthFragment : Fragment() {
     }
 
     private fun phoneNumberValidation(): Boolean {
-        if (binding.etMobileNumber.text.toString().isEmpty()) {
+        return if (binding.etMobileNumber.text.toString().isEmpty()) {
             binding.tilMobileNumber.error = getString(R.string.enter_phone_number)
-            return false
+            false
         } else if (binding.etMobileNumber.text.toString().length < 10) {
             binding.tilMobileNumber.error = getString(R.string.enter_valid_phone_number)
-            return false
+            false
         } else {
-            return true
+            true
         }
     }
 
@@ -75,7 +71,7 @@ class AuthFragment : Fragment() {
 
     private fun otpValidation() {
         val ph = binding.etMobileNumber.text.toString()
-        val otp = ph.substring(6,10)
+        val otp = ph.substring(6, 10)
         val enteredOtp = binding.pvOtp.text.toString()
         if (enteredOtp.isEmpty()) {
             toast(getString(R.string.enter_otp))
@@ -90,14 +86,6 @@ class AuthFragment : Fragment() {
         val imm =
             requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(requireView().windowToken, 0)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        lifecycleScope.launch {
-            delay(2000)
-            findNavController().navigate(R.id.action_authFragment_to_dashboardFragment)
-        }
     }
 
 }

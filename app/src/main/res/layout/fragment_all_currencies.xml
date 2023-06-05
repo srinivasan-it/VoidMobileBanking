@@ -24,21 +24,37 @@
                 android:orientation="vertical">
 
                 <include layout="@layout/shimmer_list_item_currency" />
+
                 <include layout="@layout/shimmer_list_item_currency" />
+
                 <include layout="@layout/shimmer_list_item_currency" />
+
                 <include layout="@layout/shimmer_list_item_currency" />
+
                 <include layout="@layout/shimmer_list_item_currency" />
+
                 <include layout="@layout/shimmer_list_item_currency" />
+
                 <include layout="@layout/shimmer_list_item_currency" />
+
                 <include layout="@layout/shimmer_list_item_currency" />
+
                 <include layout="@layout/shimmer_list_item_currency" />
+
                 <include layout="@layout/shimmer_list_item_currency" />
+
                 <include layout="@layout/shimmer_list_item_currency" />
+
                 <include layout="@layout/shimmer_list_item_currency" />
+
                 <include layout="@layout/shimmer_list_item_currency" />
+
                 <include layout="@layout/shimmer_list_item_currency" />
+
                 <include layout="@layout/shimmer_list_item_currency" />
+
                 <include layout="@layout/shimmer_list_item_currency" />
+
                 <include layout="@layout/shimmer_list_item_currency" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -50,8 +66,8 @@
             android:id="@+id/currencies"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="gone"
-            android:background="@color/bg_ui">
+            android:background="@color/bg_ui"
+            android:visibility="gone">
 
 
             <androidx.appcompat.widget.AppCompatTextView

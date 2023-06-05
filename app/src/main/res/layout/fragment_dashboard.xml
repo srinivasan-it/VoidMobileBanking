@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmer"
@@ -26,8 +26,8 @@
             android:id="@+id/dashboard"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:visibility="visible"
-            android:background="@color/bg_ui">
+            android:background="@color/bg_ui"
+            android:visibility="visible">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_profile_img"
@@ -142,8 +142,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginEnd="15dp"
-                android:text="@string/view_all"
                 android:padding="5dp"
+                android:text="@string/view_all"
                 android:textColor="@color/purple_700"
                 android:textSize="13sp"
                 android:textStyle="bold"
@@ -155,22 +155,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_margin="10dp"
-                tools:listitem="@layout/list_item_currency"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_currencies"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                tools:listitem="@layout/list_item_currency" />
 
             <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
                 android:id="@+id/fab_transfer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:textColor="@color/white"
-                android:textAllCaps="false"
-                android:text="@string/funds_transfer"
-                app:icon="@drawable/ic_currency_rupee"
                 android:layout_margin="25dp"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                android:text="@string/funds_transfer"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:icon="@drawable/ic_currency_rupee"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
