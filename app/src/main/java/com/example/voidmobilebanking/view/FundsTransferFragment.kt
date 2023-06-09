@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -40,6 +41,12 @@ class FundsTransferFragment : Fragment() {
     private fun setActionListener() {
         binding.etAmount.setOnFocusChangeListener { _, _ ->
             phoneNumberValidation()
+        }
+        binding.etMobileNumber.addTextChangedListener {
+            binding.tilMobileNumber.error = null
+        }
+        binding.etAmount.addTextChangedListener {
+            binding.tilAmount.error = null
         }
         binding.btnTransfer.setOnClickListener {
             if (phoneNumberValidation())

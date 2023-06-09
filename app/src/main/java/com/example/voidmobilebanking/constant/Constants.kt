@@ -1,4 +1,4 @@
-package com.example.voidmobilebanking
+package com.example.voidmobilebanking.constant
 
 /**
  * Created by srinivasan on 03/06/23.
@@ -6,4 +6,5 @@ package com.example.voidmobilebanking
 object Constants {
 
     const val CURRENCIES_LIST = "CURRENCIES_LIST"
+    const val CODE_INDIA = "IN"
 }

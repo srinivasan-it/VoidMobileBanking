@@ -20,7 +20,8 @@ import java.net.SocketTimeoutException
 class DashboardViewModel : ViewModel() {
 
     private val soapObject = SoapObject(BuildConfig.NAME_SPACE, BuildConfig.METHOD_NAME)
-    val envelope = SoapSerializationEnvelope(SoapEnvelope.VER11)
+
+    private val envelope = SoapSerializationEnvelope(SoapEnvelope.VER11)
 
     private var _error = MutableLiveData<String>()
     val error: LiveData<String> = _error
@@ -101,7 +102,7 @@ class DashboardViewModel : ViewModel() {
 
         val currencies = arrayListOf<Currencies>()
 
-        code.forEachIndexed { index, s ->
+        code.forEachIndexed { index, _ ->
             currencies.add(Currencies(currencyCode = code[index], currencyName = name[index]))
         }
 
@@ -121,8 +122,6 @@ class DashboardViewModel : ViewModel() {
                 modelClass: Class<T>,
                 extras: CreationExtras
             ): T {
-                val application =
-                    checkNotNull(extras[ViewModelProvider.AndroidViewModelFactory.APPLICATION_KEY])
                 return DashboardViewModel() as T
             }
         }

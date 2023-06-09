@@ -4,16 +4,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.voidmobilebanking.Constants
 import com.example.voidmobilebanking.R
 import com.example.voidmobilebanking.adapter.CurrenciesAdapter
+import com.example.voidmobilebanking.constant.Constants
 import com.example.voidmobilebanking.databinding.FragmentDashboardBinding
 import com.example.voidmobilebanking.model.Currencies
 import com.example.voidmobilebanking.model.CurrenciesList
+import com.example.voidmobilebanking.utils.Utils
 import com.example.voidmobilebanking.viewmodel.DashboardViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -39,6 +41,17 @@ class DashboardFragment : Fragment() {
 
     private var currenciesList = arrayListOf<Currencies>()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        requireActivity().onBackPressedDispatcher.addCallback(
+            this,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    requireActivity().finish()
+                }
+            })
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,6 +76,9 @@ class DashboardFragment : Fragment() {
             shimmer(false)
             val first20Elements = it.stream().limit(20).collect(Collectors.toList())
             adapter.submitData(first20Elements)
+        }
+        viewModel.error.observe(viewLifecycleOwner) {
+            Utils.showToast(requireContext(), requireView(), it)
         }
     }
 

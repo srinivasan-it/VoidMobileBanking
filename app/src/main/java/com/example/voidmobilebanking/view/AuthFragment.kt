@@ -1,18 +1,17 @@
 package com.example.voidmobilebanking.view
 
-import android.content.Context
 import android.os.Bundle
 import android.telephony.PhoneNumberFormattingTextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.voidmobilebanking.R
+import com.example.voidmobilebanking.constant.Constants
 import com.example.voidmobilebanking.databinding.FragmentAuthBinding
+import com.example.voidmobilebanking.utils.Utils
 
 /**
  * [AuthFragment] - used to log in the app
@@ -21,7 +20,6 @@ class AuthFragment : Fragment() {
 
     private lateinit var binding: FragmentAuthBinding
 
-    private val codeIN = "IN"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,7 +33,7 @@ class AuthFragment : Fragment() {
     private fun setActionListener() {
         binding.etMobileNumber.addTextChangedListener(
             PhoneNumberFormattingTextWatcher(
-                codeIN
+                Constants.CODE_INDIA
             )
         )
         binding.etMobileNumber.addTextChangedListener {
@@ -64,28 +62,20 @@ class AuthFragment : Fragment() {
         }
     }
 
-    private fun toast(s: String) {
-        closeSoftKeyboard()
-        Toast.makeText(requireContext(), s, Toast.LENGTH_SHORT).show()
-    }
-
+    /**
+     * Last four digits of the entered mobile number will be the OTP to login
+     */
     private fun otpValidation() {
         val ph = binding.etMobileNumber.text.toString()
         val otp = ph.substring(6, 10)
         val enteredOtp = binding.pvOtp.text.toString()
         if (enteredOtp.isEmpty()) {
-            toast(getString(R.string.enter_otp))
+            Utils.showToast(requireContext(), requireView(), getString(R.string.enter_otp))
         } else if (enteredOtp.length < 4 || enteredOtp != otp) {
-            toast(getString(R.string.invalid_otp))
+            Utils.showToast(requireContext(), requireView(), getString(R.string.invalid_otp))
         } else {
             findNavController().navigate(R.id.action_authFragment_to_dashboardFragment)
         }
-    }
-
-    private fun closeSoftKeyboard() {
-        val imm =
-            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(requireView().windowToken, 0)
     }
 
 }

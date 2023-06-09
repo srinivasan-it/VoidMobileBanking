@@ -8,7 +8,7 @@ import com.example.voidmobilebanking.R
 
 class MainActivity : AppCompatActivity() {
 
-    val navHostFragment by lazy {
+    private val navHostFragment by lazy {
         supportFragmentManager.fragments.first() as NavHostFragment
     }
 
