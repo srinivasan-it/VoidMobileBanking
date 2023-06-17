@@ -5,6 +5,20 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        debug {
+            storeFile file('/home/twilightuser/Documents/sri/personal/my-release-key.keystore')
+            storePassword '123456'
+            keyAlias 'alias_name'
+            keyPassword '123456'
+        }
+        release {
+            storeFile file('/home/twilightuser/Documents/sri/personal/my-release-key.keystore')
+            storePassword '123456'
+            keyAlias 'alias_name'
+            keyPassword '123456'
+        }
+    }
     namespace 'com.example.voidmobilebanking'
     compileSdk 33
 
@@ -20,7 +34,8 @@ android {
 
     buildTypes {
         debug {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField 'String', 'URL', '"http://webservices.oorsprong.org/websamples.countryinfo/CountryInfoService.wso"'
             buildConfigField 'String', 'NAME_SPACE', '"http://www.oorsprong.org/websamples.countryinfo"'
